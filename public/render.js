@@ -19,6 +19,14 @@ function drawConnection(svg, node1, node2, scaleX, scaleY) {
         .attr('stroke-width', 2);
 }
 
+function renderConnections(svg, connections, nodes, scaleX, scaleY) {
+    connections.forEach(conn => {
+        const node1 = nodes.find(node => node.id === conn.sourceId);
+        const node2 = nodes.find(node => node.id === conn.targetId);
+        drawConnection(svg, node1, node2, scaleX, scaleY);
+    });
+}
+
 
 function connectNodes(connections, sourceId, targetId) {
     connections.push({ sourceId, targetId });
@@ -67,11 +75,7 @@ function renderSVG() {
         { id: 'center', x: 0, y: 0 }
     ];
 
-    const connections = [];
 
-    addNode(nodes, 'New', 9, 6);
-    connectNodes(connections, 'New', 'A');
-    connectNodes(connections, 'C', 'D');
 
     // ==================================================
     // 6. SVG 컨테이너 생성: 그래프 영역 생성
@@ -145,7 +149,7 @@ function renderSVG() {
     // 9. 사분면 레이블 추가: 각 사분면에 레이블 추가
     // ==================================================
     const quadrantLabels = [
-        { text: 'Should', x: (x_value * 3) / 4, y: (y_value * 3) / 4 }, 
+        { text: 'Should', x:x_value, y: y_value }, 
         { text: 'Did', x: (-x_value * 3) / 4, y: (y_value * 3) / 4 }, 
         { text: 'Can', x: (-x_value * 3) / 4, y: (-y_value * 3) / 4 }, 
         { text: 'Want', x: (x_value * 3) / 4, y: (-y_value * 3) / 4 } 
@@ -192,13 +196,14 @@ function renderSVG() {
     // ==================================================
     // 12. 노드 연결선 추가: 연결된 노드 간의 선을 추가
     // ==================================================
-    connections.forEach(conn => {
-        const node1 = nodes.find(node => node.id === conn.sourceId);
-        const node2 = nodes.find(node => node.id === conn.targetId);
-        drawConnection(svg, node1, node2, scaleX, scaleY);
-    });
-}
+    const connections = [];
 
+    addNode(nodes, 'New', 9, 6);
+    connectNodes(connections, 'New', 'A');
+    connectNodes(connections, 'C', 'D');
+    
+    renderConnections(svg, connections, nodes, scaleX, scaleY);
+}
 // 페이지 로드 완료 후 SVG 렌더링
 window.addEventListener('load', function() {
     requestAnimationFrame(renderSVG);
