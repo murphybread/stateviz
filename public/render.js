@@ -1,3 +1,12 @@
+function addNode(nodes, id, x, y) {
+    nodes.push({ id, x, y });
+}
+
+function connectNodes(connections, sourceId, targetId) {
+    connections.push({ sourceId, targetId });
+}
+
+
 function renderSVG() {
     // ==================================================
     // 1. 기본 설정: SVG 크기 및 마진 정의
@@ -46,6 +55,11 @@ function renderSVG() {
         { id: 'D', x: 6, y: -3 },
         { id: 'center', x: 0, y: 0 }
     ];
+
+    const connections = [];
+
+    addNode(nodes, 'New', 9, 6);
+    connectNodes(connections, 'New', 'A');
 
     // ==================================================
     // 6. SVG 컨테이너 생성: 그래프 영역 생성
