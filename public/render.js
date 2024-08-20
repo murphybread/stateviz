@@ -1,6 +1,24 @@
+// 스케일 함수 정의
+function createScale(domain, range) {
+    return d3.scaleLinear()
+             .domain(domain)
+             .range(range);
+}
+
 function addNode(nodes, id, x, y) {
     nodes.push({ id, x, y });
 }
+
+function drawConnection(svg, node1, node2, scaleX, scaleY) {
+    svg.append('line')
+        .attr('x1', scaleX(node1.x))
+        .attr('y1', scaleY(node1.y))
+        .attr('x2', scaleX(node2.x))
+        .attr('y2', scaleY(node2.y))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 2);
+}
+
 
 function connectNodes(connections, sourceId, targetId) {
     connections.push({ sourceId, targetId });
@@ -15,34 +33,27 @@ function renderSVG() {
     const height = 500;
     const margin = {top: 20, right: 30, bottom: 80, left: 60}; // 하단 마진 확대
 
+
+
     // ==================================================
     // 2. 상수 정의: X, Y의 최대값 설정
     // ==================================================
     const x_value = 10;
     const y_value = 10;
 
-    // ==================================================
-    // 3. 데이터 정의: 예시 데이터
-    // ==================================================
-    const data = [
-        { id: 'A', valueX: 3, valueY: 8 },
-        { id: 'B', valueX: 7, valueY: 4 },
-        { id: 'C', valueX: -5, valueY: 9 },
-        { id: 'D', valueX: 6, valueY: -3 }
-    ];
 
     // ==================================================
     // 4. 축 범위 계산: 데이터 기반으로 X, Y 축 범위 설정
     // ==================================================
-    const xExtent = d3.extent(data, d => d.valueX);
-    const yExtent = d3.extent(data, d => d.valueY);
 
-    const scaleX = d3.scaleLinear()
-        .domain([Math.min(xExtent[0], -x_value), Math.max(xExtent[1], x_value)]) 
+
+    // 스케일을 기존 변수를 활용해 선언
+    scaleX = d3.scaleLinear()
+        .domain([-x_value, x_value])
         .range([margin.left, width - margin.right]);
 
-    const scaleY = d3.scaleLinear()
-        .domain([Math.min(yExtent[0], -y_value), Math.max(yExtent[1], y_value)]) 
+    scaleY = d3.scaleLinear()
+        .domain([-y_value, y_value])
         .range([height - margin.bottom, margin.top]);
 
     // ==================================================
@@ -60,6 +71,7 @@ function renderSVG() {
 
     addNode(nodes, 'New', 9, 6);
     connectNodes(connections, 'New', 'A');
+    connectNodes(connections, 'C', 'D');
 
     // ==================================================
     // 6. SVG 컨테이너 생성: 그래프 영역 생성
@@ -175,6 +187,16 @@ function renderSVG() {
         .attr('text-anchor', 'middle')
         .text(d => d.id)
         .attr('fill', 'black');
+
+
+    // ==================================================
+    // 12. 노드 연결선 추가: 연결된 노드 간의 선을 추가
+    // ==================================================
+    connections.forEach(conn => {
+        const node1 = nodes.find(node => node.id === conn.sourceId);
+        const node2 = nodes.find(node => node.id === conn.targetId);
+        drawConnection(svg, node1, node2, scaleX, scaleY);
+    });
 }
 
 // 페이지 로드 완료 후 SVG 렌더링
