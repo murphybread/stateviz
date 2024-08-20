@@ -149,7 +149,7 @@ function renderSVG() {
     // 9. 사분면 레이블 추가: 각 사분면에 레이블 추가
     // ==================================================
     const quadrantLabels = [
-        { text: 'Should', x:x_value, y: y_value }, 
+        { text: 'Should', x:x_value-2, y: y_value-1 }, 
         { text: 'Did', x: (-x_value * 3) / 4, y: (y_value * 3) / 4 }, 
         { text: 'Can', x: (-x_value * 3) / 4, y: (-y_value * 3) / 4 }, 
         { text: 'Want', x: (x_value * 3) / 4, y: (-y_value * 3) / 4 } 
@@ -170,6 +170,9 @@ function renderSVG() {
     // ==================================================
     // 10. 노드 추가: 그래프에 노드 추가
     // ==================================================
+
+    addNode(nodes, 'New', 9, 6);
+
     svg.selectAll('circle')
         .data(nodes)
         .enter()
@@ -198,10 +201,10 @@ function renderSVG() {
     // ==================================================
     const connections = [];
 
-    addNode(nodes, 'New', 9, 6);
+    
     connectNodes(connections, 'New', 'A');
     connectNodes(connections, 'C', 'D');
-    
+
     renderConnections(svg, connections, nodes, scaleX, scaleY);
 }
 // 페이지 로드 완료 후 SVG 렌더링
