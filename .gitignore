@@ -10,17 +10,16 @@ node_modules/
 # Dependency directories
 jspm_packages/
 
-# Build output
-dist/
-build/
+# Build output (React)
+**/build/
 
 # OS-specific files
 .DS_Store
 Thumbs.db
 
 # IDE-specific files
-.idea/
-.vscode/
+**/.idea/
+**/.vscode/
 *.sublime-project
 *.sublime-workspace
 
@@ -33,3 +32,30 @@ Thumbs.db
 
 # npm package lock file
 package-lock.json
+
+# Coverage reports
+**/coverage/
+
+# Local configuration files
+**/*.local
+
+# Cache files
+**/*.cache
+
+# Public static files (React)
+**/public/static/
+
+# Test output (React)
+**/src/reportWebVitals.js
+**/src/setupTests.js
+
+# React manifest and service worker files
+**/public/manifest.json
+**/public/robots.txt
+**/src/serviceWorker.js
+
+# React assets (optional, if you want to keep them out of version control)
+**/public/*.ico
+**/public/*.png
+**/public/*.svg
+**/public/*.jpg
