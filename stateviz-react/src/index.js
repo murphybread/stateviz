@@ -5,10 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Library from './Chapter03/Library';
 
+import Clock from './Chapter04/Clock';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Library />
+    <Clock />
   </React.StrictMode>
 );
 
