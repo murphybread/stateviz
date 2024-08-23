@@ -9,10 +9,12 @@ import Clock from './Chapter04/Clock';
 
 import CommentList from './Chapter05/CommentList';
 
+import NotificationList from './Chapter06/NotificationList';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CommentList />
+    <NotificationList />
   </React.StrictMode>
 );
 
