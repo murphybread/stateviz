@@ -3,20 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
 import Library from './Chapter03/Library';
-
 import Clock from './Chapter04/Clock';
-
 import CommentList from './Chapter05/CommentList';
-
 import NotificationList from './Chapter06/NotificationList';
-
 import Accomodate from './Chapter07/Accomodate';
+import ConfirmButton from './Chapter08/ConfirmButton';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Accomodate />
+    <ConfirmButton />
   </React.StrictMode>
 );
 
