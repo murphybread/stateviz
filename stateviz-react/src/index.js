@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import MyForm from './chatgptform';
+
 import Library from './Chapter03/Library';
 import Clock from './Chapter04/Clock';
 import CommentList from './Chapter05/CommentList';
@@ -13,12 +15,13 @@ import ConfirmButton from './Chapter08/ConfirmButton';
 import LandingPage from './Chapter09/LandingPage';
 import AttendanceBook from './Chapter10/AtrtendanceBook';
 import SignUp from './Chapter11/SingUp';
+import Calculator from './Chapter12/Calculator';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SignUp />
+    <Calculator />
   </React.StrictMode>
 );
 
