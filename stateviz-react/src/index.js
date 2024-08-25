@@ -16,12 +16,12 @@ import LandingPage from './Chapter09/LandingPage';
 import AttendanceBook from './Chapter10/AtrtendanceBook';
 import SignUp from './Chapter11/SingUp';
 import Calculator from './Chapter12/Calculator';
-
+import ProfileCard from './Chapter13/ProfileCard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Calculator />
+    <ProfileCard />
   </React.StrictMode>
 );
 
