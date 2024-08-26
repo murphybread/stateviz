@@ -18,11 +18,12 @@ import SignUp from './Chapter11/SingUp';
 import Calculator from './Chapter12/Calculator';
 import ProfileCard from './Chapter13/ProfileCard';
 import DarkOrLight from './Chapter14/DarkOrLight';
+import Blocks from './Chapter15/Blocks';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <DarkOrLight />
+    <Blocks />
   </React.StrictMode>
 );
 
