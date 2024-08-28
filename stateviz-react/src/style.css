@@ -1,0 +1,33 @@
+/* 사분면 배경 색상 */
+.quadrant-1 {
+    fill: #3773b3; /* 1st quadrant */
+}
+
+.quadrant-2 {
+    fill: #33dd33; /* 2nd quadrant */
+}
+
+.quadrant-3 {
+    fill: #cc2b2b; /* 3rd quadrant */
+}
+
+.quadrant-4 {
+    fill: #ddda2a; /* 4th quadrant */
+}
+
+/* 노드 색상 */
+circle {
+    fill: azure;
+}
+
+/* 텍스트 스타일 */
+.quadrant-label {
+    fill: #0d0d0d;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.node-label {
+    fill: black;
+}
+
