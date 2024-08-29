@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import './style.css';  // CSS 파일 import
 
-
-
 function Chart() {
   const chartRef = useRef(null);
 
@@ -43,8 +41,7 @@ function Chart() {
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('width', d => d.width)
-        .attr('height', d => d.height)
-        .attr('fill', (d, i) => ['#3773b3', '#33dd33', '#cc2b2b', '#ddda2a'][i]);
+        .attr('height', d => d.height);
 
       // 축 생성
       const xAxis = d3.axisBottom(xScale);
@@ -52,10 +49,12 @@ function Chart() {
 
       // 축 추가
       svg.append('g')
+        .attr('class', 'axis')
         .attr('transform', `translate(0,${height / 2})`)
         .call(xAxis);
 
       svg.append('g')
+        .attr('class', 'axis')
         .attr('transform', `translate(${width / 2},0)`)
         .call(yAxis);
 
@@ -75,8 +74,7 @@ function Chart() {
         .attr('class', 'node')
         .attr('cx', d => xScale(d.x))
         .attr('cy', d => yScale(d.y))
-        .attr('r', 5)
-        .attr('fill', 'azure');
+        .attr('r', 5);
 
       // 라벨 추가
       svg.selectAll('.node-label')
@@ -86,8 +84,7 @@ function Chart() {
         .attr('class', 'node-label')
         .attr('x', d => xScale(d.x) + 10)
         .attr('y', d => yScale(d.y) + 5)
-        .text(d => d.label)
-        .attr('fill', 'black');
+        .text(d => d.label);
 
       // 4분면 라벨 추가
       const quadrantLabels = [
@@ -105,10 +102,7 @@ function Chart() {
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('text-anchor', 'middle')
-        .text(d => d.text)
-        .attr('fill', '#0d0d0d')
-        .attr('font-size', '24px')
-        .attr('font-weight', 'bold');
+        .text(d => d.text);
     }
   }, []);
 
