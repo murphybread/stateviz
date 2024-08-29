@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import './style.css';  // CSS 파일 import
 
+
+
 function Chart() {
   const chartRef = useRef(null);
 
@@ -16,13 +18,16 @@ function Chart() {
 
       svg.attr('width', width).attr('height', height);
 
+      // 스케일 범위 설정 (여기서 조절 가능)
+      const scaleRange = 15;
+
       // 스케일 설정
       const xScale = d3.scaleLinear()
-        .domain([-1, 1])
+        .domain([-scaleRange, scaleRange])
         .range([margin.left, width - margin.right]);
 
       const yScale = d3.scaleLinear()
-        .domain([-1, 1])
+        .domain([-scaleRange, scaleRange])
         .range([height - margin.bottom, margin.top]);
 
       // 4분면 배경 추가
@@ -44,8 +49,13 @@ function Chart() {
         .attr('height', d => d.height);
 
       // 축 생성
-      const xAxis = d3.axisBottom(xScale);
-      const yAxis = d3.axisLeft(yScale);
+      const xAxis = d3.axisBottom(xScale)
+        .ticks(10)
+        .tickFormat(d3.format("d"));
+
+      const yAxis = d3.axisLeft(yScale)
+        .ticks(10)
+        .tickFormat(d3.format("d"));
 
       // 축 추가
       svg.append('g')
@@ -57,6 +67,7 @@ function Chart() {
         .attr('class', 'axis')
         .attr('transform', `translate(${width / 2},0)`)
         .call(yAxis);
+
 
       // 샘플 데이터
       const data = [
@@ -74,7 +85,8 @@ function Chart() {
         .attr('class', 'node')
         .attr('cx', d => xScale(d.x))
         .attr('cy', d => yScale(d.y))
-        .attr('r', 5);
+        .attr('r', 5)
+        .attr('fill', 'azure');
 
       // 라벨 추가
       svg.selectAll('.node-label')
@@ -84,7 +96,8 @@ function Chart() {
         .attr('class', 'node-label')
         .attr('x', d => xScale(d.x) + 10)
         .attr('y', d => yScale(d.y) + 5)
-        .text(d => d.label);
+        .text(d => d.label)
+        .attr('fill', 'black');
 
       // 4분면 라벨 추가
       const quadrantLabels = [
@@ -102,7 +115,10 @@ function Chart() {
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('text-anchor', 'middle')
-        .text(d => d.text);
+        .text(d => d.text)
+        .attr('fill', '#0d0d0d')
+        .attr('font-size', '24px')
+        .attr('font-weight', 'bold');
     }
   }, []);
 
