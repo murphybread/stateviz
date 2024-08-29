@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
+import './style.css';  // CSS 파일 import
+
+
 
 function Chart() {
   const chartRef = useRef(null);
@@ -24,19 +27,6 @@ function Chart() {
         .domain([-1, 1])
         .range([height - margin.bottom, margin.top]);
 
-      // 축 생성
-      const xAxis = d3.axisBottom(xScale);
-      const yAxis = d3.axisLeft(yScale);
-
-      // 축 추가
-      svg.append('g')
-        .attr('transform', `translate(0,${height / 2})`)
-        .call(xAxis);
-
-      svg.append('g')
-        .attr('transform', `translate(${width / 2},0)`)
-        .call(yAxis);
-
       // 4분면 배경 추가
       const quadrants = [
         { class: 'quadrant-1', x: width / 2, y: margin.top, width: width / 2 - margin.right, height: height / 2 - margin.top },
@@ -53,7 +43,21 @@ function Chart() {
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('width', d => d.width)
-        .attr('height', d => d.height);
+        .attr('height', d => d.height)
+        .attr('fill', (d, i) => ['#3773b3', '#33dd33', '#cc2b2b', '#ddda2a'][i]);
+
+      // 축 생성
+      const xAxis = d3.axisBottom(xScale);
+      const yAxis = d3.axisLeft(yScale);
+
+      // 축 추가
+      svg.append('g')
+        .attr('transform', `translate(0,${height / 2})`)
+        .call(xAxis);
+
+      svg.append('g')
+        .attr('transform', `translate(${width / 2},0)`)
+        .call(yAxis);
 
       // 샘플 데이터
       const data = [
@@ -71,7 +75,8 @@ function Chart() {
         .attr('class', 'node')
         .attr('cx', d => xScale(d.x))
         .attr('cy', d => yScale(d.y))
-        .attr('r', 5);
+        .attr('r', 5)
+        .attr('fill', 'azure');
 
       // 라벨 추가
       svg.selectAll('.node-label')
@@ -81,7 +86,8 @@ function Chart() {
         .attr('class', 'node-label')
         .attr('x', d => xScale(d.x) + 10)
         .attr('y', d => yScale(d.y) + 5)
-        .text(d => d.label);
+        .text(d => d.label)
+        .attr('fill', 'black');
 
       // 4분면 라벨 추가
       const quadrantLabels = [
@@ -99,7 +105,10 @@ function Chart() {
         .attr('x', d => d.x)
         .attr('y', d => d.y)
         .attr('text-anchor', 'middle')
-        .text(d => d.text);
+        .text(d => d.text)
+        .attr('fill', '#0d0d0d')
+        .attr('font-size', '24px')
+        .attr('font-weight', 'bold');
     }
   }, []);
 
